@@ -21,3 +21,10 @@ To do:
 理想情况下，提交项目文件~
 
 hhh
+
+# 问·道（Seeking The Classic）
+Algorithm Comprehend Heritage
+
+## 项目简介
+问·道是一款面向广大中小学生开发的私人文言文学习助手，旨在帮助中小学生更好掌握文言文知识。
+
