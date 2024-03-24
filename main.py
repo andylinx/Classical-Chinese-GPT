@@ -56,9 +56,41 @@ def get_answer(prompt):
     res = tokenizer.decode(output[0], skip_special_tokens=True)
     return res[len(prompt)+11:]
 
+import re
+
+word_dic={}
+with open('vocab.txt', 'r') as file:
+    for line in file:
+        split_points = [match.start() for match in re.finditer(r'\d+', line)]
+        split_points.append(len(line))
+        start = 0
+        pos=1
+        word=""
+        for point in split_points:
+            substring = line[start:point]
+            if len(substring)>=1:
+                if pos==1:
+                    word=substring[-1]
+                    pos=0
+                    word_dic.setdefault(word, [])
+                else:
+                    word_dic[word].append(substring)
+            start = point
+
+def get_keywords(sentence):
+  for i in sentence[0]:
+     if i in word_dic.keys():
+        value = word_dic[i]
+        print(i + ":")
+        for item in value:
+            print(item)
+        print()
+        
 
 prompt = input("今天想聊点什么呢？\n")
 while 1:
   res = get_answer(prompt)
-  print(inference(res))
+  result = inference(res)
+  print(result)
+  get_keywords(result)
   prompt = input()

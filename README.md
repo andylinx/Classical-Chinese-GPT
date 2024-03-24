@@ -16,10 +16,11 @@ Algorithm Comprehend Heritage
 
 - ChatGLM3-int4 : 对话大模型
 - TranslateModel : 翻译大模型
--  crawl.py: 数据爬虫
--  bigdl_llm_lowbit.py: 模型压缩 (无需重复运行)
+- crawler.py: 数据爬虫
+- vocab.txt: 文言字词数据
+- requirements.txt: 环境依赖文件
+- bigdl_llm_lowbit.py: 模型压缩 (无需重复运行)
 - main.py: 主体运行文件
-- requirements.txt: 环境文件
 - 问·道.pdf : 项目技术报告
 
 
@@ -61,5 +62,9 @@ python3 main.py
 
 ## Demo
 
+
 ![image](https://github.com/andylinx/Classical-Chinese-GPT/blob/main/image/demo1.png)
 
+**文言字词教学模式**
+
+![image](https://github.com/andylinx/Classical-Chinese-GPT/blob/main/image/demo2.png)
