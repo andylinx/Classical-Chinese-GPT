@@ -27,4 +27,13 @@ Algorithm Comprehend Heritage
 
 ## 项目简介
 问·道是一款面向广大中小学生开发的私人文言文学习助手，旨在帮助中小学生更好掌握文言文知识。
+## 内容说明
+- ChatGLM2-int4 : 对话大模型
+- TranslateModel : 翻译大模型
+-  : 爬虫
+- main.ipynb : 主体运行文件
+- 问·道.pdf : 项目技术报告
+## 使用教程
+
+## Demo
 
