@@ -1,39 +1,64 @@
-# 问·道 项目的诞生
-
-## day 1
-To do:
-
-1.完成模型压缩和baseline的实现，包括CHATGLM2和文言翻译模型 by andyc_03
-
-2.PPT初稿以及Github上README的实现 by Hugo
-
-3.完成数据的爬取，最好能完成索引的设置，形成csv by Czar
-
-## day 2
-To do:
-
-1.完成语句中关键词的查找
-
-2.完善PPT，项目介绍，经历分享
-
-3.完成展示效果的录制
-
-理想情况下，提交项目文件~
-
-hhh
-
 # 问·道（Seeking The Classic）
 Algorithm Comprehend Heritage
 
+
+
 ## 项目简介
-问·道是一款面向广大中小学生开发的私人文言文学习助手，旨在帮助中小学生更好掌握文言文知识。
+**问·道**是一款面向广大中小学生开发的私人文言文学习助手，旨在帮助中小学生更好掌握文言文知识。
+
+基于[ChatGLM3-6B](https://github.com/THUDM/ChatGLM3)，以及[wenyanwen-chinese-translate-to-ancient](https://huggingface.co/raynardj/wenyanwen-chinese-translate-to-ancient) 两个模型，使用了**Bigdl-llm**的INT4量化策略进行压缩部署。
+
+第一代 **问·道** 能够支持无需gpu的部署，对RAM占用较小，且有着良好的对话质量。
+
+
+
 ## 内容说明
-- ChatGLM2-int4 : 对话大模型
+
+- ChatGLM3-int4 : 对话大模型
 - TranslateModel : 翻译大模型
--  : 爬虫
-- main.ipynb : 主体运行文件
+-  crawl.py: 数据爬虫
+-  bigdl_llm_lowbit.py: 模型压缩 (无需重复运行)
+- main.py: 主体运行文件
+- requirements.txt: 环境文件
 - 问·道.pdf : 项目技术报告
+
+
+
 ## 使用教程
+
+使用 pip 安装依赖：
+
+```
+pip install -r requirements.txt
+```
+
+- 为了保证 `torch` 的版本正确，请严格按照 [官方文档](https://pytorch.org/get-started/locally/) 的说明安装。
+
+
+
+#### 模型压缩部分
+
+可以直接从仓库下载压缩后的模型文件，亦可以从huggingface上获取完成版
+而后运行我们的压缩程序进行压缩
+
+```
+python3 bigdl_llm_lowbit.py
+```
+
+
+
+#### 主体运行
+
+```
+python3 main.py
+```
+
+**即可开始对话学习啦~**
+
+
+
+
 
 ## Demo
 
+![image-20240324131444035](C:\Users\13123\AppData\Roaming\Typora\typora-user-images\image-20240324131444035.png)
