@@ -61,5 +61,5 @@ python3 main.py
 
 ## Demo
 
-[![image]("/image/demo1.png")](https://github.com/andylinx/Classical-Chinese-GPT/blob/main/image/demo1.png)https://github.com/andylinx/Classical-Chinese-GPT/blob/main/image/demo1.png
+![image](https://github.com/andylinx/Classical-Chinese-GPT/blob/main/image/demo1.png)
 
