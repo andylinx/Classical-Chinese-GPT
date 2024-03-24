@@ -61,4 +61,5 @@ python3 main.py
 
 ## Demo
 
-![image-20240324131444035](C:\Users\13123\AppData\Roaming\Typora\typora-user-images\image-20240324131444035.png)
+![image]("/image/demo1.png")
+
