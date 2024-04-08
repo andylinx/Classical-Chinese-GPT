@@ -78,19 +78,19 @@ with open('vocab.txt', 'r') as file:
             start = point
 
 def get_keywords(sentence):
+  res = ""
   for i in sentence[0]:
      if i in word_dic.keys():
         value = word_dic[i]
-        print(i + ":")
+        res = res + i + ":"
         for item in value:
-            print(item)
-        print()
-        
+            res = res + item + "\n"
+        res = res + "\n"
+  return res
 
-prompt = input("今天想聊点什么呢？\n")
-while 1:
-  res = get_answer(prompt)
-  result = inference(res)
-  print(result)
-  get_keywords(result)
-  prompt = input()
+def wendao_infer(input_data):
+    prompt = input_data
+    res = get_answer(prompt)
+    result = inference(res)
+    res = res + get_keywords(result) + "\n"
+    return res
