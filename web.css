@@ -1,0 +1,115 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #f7f7f7;
+}
+
+#wholeConatiner {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+#leftContainer {
+  flex: 5;
+  height: 100%;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#rightContainer {
+  flex: 8;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#chatContainer {
+  flex: 10;
+  font-size: large;
+  border: 2px solid black;
+  padding: 5px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+#inputArea {
+  flex: 1;
+  font-size: large;
+  display: flex;
+  gap: 5px;
+  padding: 10px;
+  background-color: #e1eaf3e2;
+}
+.message-container{
+  display: flex; /* 使用Flexbox布局 */
+  align-items: center; /* 垂直居中对齐 */
+  margin-bottom: 10px; /* 根据需要添加外边距 */
+}
+.message {
+  font-family: KaiTi;
+  max-width: 80%;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 40px;
+}
+
+.ImageStyle{
+  width: 100px; /* 根据需要设置图片宽度 */
+  height: auto; /* 保持图片的原始宽高比 */
+  margin-left: 10px; /* 根据需要添加左边距 */
+}
+
+.user_end{
+  align-self: flex-end;
+}
+
+.user {
+  /* 'sans-serif'; */
+  /* align-self: flex-end; */
+  background-color: #007bff;
+  color: white;
+}
+
+.server {
+  align-self: flex-start;
+  background-color: #e9ecef;
+}
+
+#inputText {
+  flex: 3;
+  font-size: 30px;
+  padding: 10px 5px;
+  margin: 0;
+  resize: none;
+  border: none;
+  border-radius: 10px;
+}
+
+#sendButton {
+  padding: 5px 15px;
+  background-color: hsl(103, 96%, 73%);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#sendButton:hover {
+  background-color: #6dff4f;
+}
+
+#leftPC{
+  flex: 1;
+  width: 600px;
+  height: 600px;
+}

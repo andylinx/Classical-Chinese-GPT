@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Streamlined Chat Dialog</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <link rel="stylesheet" href="web.css">
+</head>
+
+<body>
+  <div id="wholeConatiner">
+    <section id="leftContainer">
+      <div id="leftPart">
+        <img id='leftPC'
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3C3gPaUV-q4eqoyJHpp7UGhDfg2nADD40NT-FO9dcQQ&s"
+          alt="G">
+      </div>
+    </section>
+    <section id="rightContainer">
+      <div id="chatContainer">
+        <!-- Messages will be appended here -->
+      </div>
+      <div id="inputArea">
+        <input type="text" id="inputText" placeholder="Enter或Send">
+        <button type="button" id="sendButton">Send</button>
+      </div>
+    </section>
+  </div>
+  <script>
+    window.onload = function () {
+      var socket = io.connect();
+      var chatContainer = document.getElementById('chatContainer');
+      function addMessage(message, type) {
+        // 创建一个容器元素来包含消息和图片
+        var container = document.createElement('div');
+        if (type == 'user') {
+          container.classList.add('message-container', 'user_end');
+          // 创建一个段落元素来添加文本消息
+          var p = document.createElement('p');
+          p.classList.add('message', type);
+          p.textContent = message;
+          container.appendChild(p);
+
+          // 如果提供了图片源地址，则创建一个图片元素并添加到容器中
+          var img = document.createElement('img');
+          img.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMHpmx9VTo6jw08ujCakQ0lknMLeZe2a8Oug&s';
+          img.classList.add('ImageStyle'); // 可以添加一个特定的类来控制图片的样式
+          container.appendChild(img);
+
+          // 将容器元素添加到聊天容器中
+          chatContainer.appendChild(container);
+
+          // 滚动到聊天容器的底部
+          chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+        else {
+          container.classList.add('message-container', 'machine_end');
+          // 创建一个段落元素来添加文本消息
+          var img = document.createElement('img');
+          img.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW9a61m3jJpE-gKvvoRFgbN1w-o0OiKUCGow&s';
+          img.classList.add('ImageStyle'); // 可以添加一个特定的类来控制图片的样式
+          container.appendChild(img);
+          var p = document.createElement('p');
+          p.classList.add('message', type);
+          p.textContent = message;
+          container.appendChild(p);
+
+          // 如果提供了图片源地址，则创建一个图片元素并添加到容器中
+          
+
+          // 将容器元素添加到聊天容器中
+          chatContainer.appendChild(container);
+
+          // 滚动到聊天容器的底部
+          chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+        // 创建一个段落元素来添加文本消息
+        // var p = document.createElement('p');
+        // p.classList.add('message', type);
+        // p.textContent = message;
+        // container.appendChild(p);
+
+        // // 如果提供了图片源地址，则创建一个图片元素并添加到容器中
+        // var img = document.createElement('img');
+        // img.src = 'https://oss.1381801.com/forum/202209/02/212909m8d7zr7pt3bzd9yz.jpg';
+        // img.classList.add('ImageStyle'); // 可以添加一个特定的类来控制图片的样式
+        // container.appendChild(img);
+
+        // // 将容器元素添加到聊天容器中
+        // chatContainer.appendChild(container);
+
+        // // 滚动到聊天容器的底部
+        // chatContainer.scrollTop = chatContainer.scrollHeight;
+        // var p = document.createElement('p');
+        // p.classList.add('message', type);
+        // p.textContent = message;
+        // chatContainer.appendChild(p);
+        // chatContainer.scrollTop = chatContainer.scrollHeight;
+      }
+      socket.on('serverData', function (data) {
+        addMessage(data, 'server');
+      });
+      document.getElementById('sendButton').onclick = function () {
+        var text = document.getElementById('inputText').value;
+        if (text.trim() !== '') {
+          socket.emit('WebData', text);
+          addMessage(text, 'user');
+          document.getElementById('inputText').value = '';
+        }
+      }
+      // 监听输入框的 'keydown' 事件，当用户按下按键时触发
+      inputText.addEventListener('keydown', function (event) {
+        // 检查是否按下了回车键（键码为 13）
+        if (event.keyCode === 13 || event.key === 'Enter') {
+          // 阻止默认的回车键行为（换行）
+          event.preventDefault();
+
+          // 获取输入框中的文本
+          var text = document.getElementById('inputText').value;
+          if (text.trim() !== '') {
+            // 发送消息到服务器
+            socket.emit('WebData', text);
+            addMessage(text, 'user');
+            // 清空输入框
+            document.getElementById('inputText').value = '';
+          }
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>
