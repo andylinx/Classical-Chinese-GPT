@@ -1,3 +1,4 @@
+![image](https://github.com/andylinx/Classical-Chinese-GPT/blob/main/image/%E9%98%9F%E5%BE%BD.png)
 # 问·道（Seeking The Classic）
 Algorithm Comprehend Heritage
 
