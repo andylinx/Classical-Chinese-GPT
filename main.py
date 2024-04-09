@@ -1,6 +1,6 @@
 import warnings
 warnings.filterwarnings ("ignore")
-
+import sys
 import torch
 
 from bigdl.llm.transformers import AutoModelForCausalLM
@@ -54,7 +54,7 @@ def get_answer(prompt):
     output = model.generate(input_ids,
                             max_new_tokens=n_predict)
     res = tokenizer.decode(output[0], skip_special_tokens=True)
-    return res[len(prompt)+11:]
+    return res[len(prompt)+12:]
 
 import re
 
@@ -77,20 +77,32 @@ with open('vocab.txt', 'r') as file:
                     word_dic[word].append(substring)
             start = point
 
-def get_keywords(sentence):
-  res = ""
-  for i in sentence[0]:
-     if i in word_dic.keys():
-        value = word_dic[i]
-        res = res + i + ":"
-        for item in value:
-            res = res + item + "\n"
-        res = res + "\n"
-  return res
+import time
 
-def wendao_infer(input_data):
-    prompt = input_data
-    res = get_answer(prompt)
-    result = inference(res)
-    res = res + get_keywords(result) + "\n"
-    return res
+def output(messa = ""):
+   message = messa
+   message = message.encode('utf-8')
+   sys.stdout.buffer.write(message)
+   sys.stdout.flush()
+   time.sleep(0.1)
+
+def get_keywords(sentence):
+    for i in sentence[0]:
+     if i in word_dic.keys():
+        res = ""
+        value = word_dic[i]
+        res = res + str(i) + ":\n"
+        for item in value:
+           res = res + str(item) + "\n"
+        output(res)
+
+output("准备就绪，快来和我聊天吧\n")
+
+while 1:
+  prompt = sys.stdin.buffer.readline()
+  prompt = prompt.strip().decode('utf-8')
+  res = get_answer(prompt)
+  result = inference(res)
+  result_out = ''.join(result) + "\n"
+  output(result_out)
+  get_keywords(result)

@@ -3,12 +3,12 @@ var fs = require('fs');
 var spawn = require('child_process').spawn;
 var path = require('path');
 var childCwd = path.join(__dirname);
-const scriptPath = 'C:/WorkStation/Czar/WenDao_NativeWeb/main.py';
-const excute = 'python'
+const scriptPath = '/mnt/d/cs_courses/Classical-Chinese-GPT/main.py';
+const excute = 'python3'
 var socketio = require('socket.io')(server);
 var child = spawn(excute, [scriptPath],{ cwd: childCwd, encoding: 'utf8' }); //{ cwd: childCwd, encoding: 'utf8' }
-const htmldata = fs.readFileSync('C:/WorkStation/Czar/WenDao_NativeWeb/test.html', 'utf-8');
-const cssdata = fs.readFileSync('C:/WorkStation/Czar/WenDao_NativeWeb/web.css', 'utf-8');
+const htmldata = fs.readFileSync('./test.html', 'utf-8');
+const cssdata = fs.readFileSync('./web.css', 'utf-8');
 var server = http.createServer(function (request, response) {
     const styleTag = `<style>${cssdata}</style>`;
     const combineCSS = htmldata.replace(/(<head>|<head[^>]*>)/i, '$1' + styleTag);
@@ -39,7 +39,8 @@ io.sockets.on('connection', function (socket) {
         //child.stdin.end();
     });
     child.stdout.on('data', function (output) {
-        console.log('result:', output.toString());
-        socket.emit('serverData', output.toString());
+        var outputString = output.toString('utf-8');
+        console.log('result:', outputString);
+        socket.emit('serverData', outputString);
     });
 });

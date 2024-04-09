@@ -39,7 +39,8 @@
           // 创建一个段落元素来添加文本消息
           var p = document.createElement('p');
           p.classList.add('message', type);
-          p.textContent = message;
+          p.innerHTML = message.replace(/\n/g, '<br>');
+          // p.innerHTML = message;
           container.appendChild(p);
 
           // 如果提供了图片源地址，则创建一个图片元素并添加到容器中
@@ -63,40 +64,15 @@
           container.appendChild(img);
           var p = document.createElement('p');
           p.classList.add('message', type);
-          p.textContent = message;
+          p.innerHTML = message.replace(/\n/g, '<br>');
+          // p.textContent = message;
           container.appendChild(p);
-
           // 如果提供了图片源地址，则创建一个图片元素并添加到容器中
-          
-
           // 将容器元素添加到聊天容器中
           chatContainer.appendChild(container);
-
           // 滚动到聊天容器的底部
           chatContainer.scrollTop = chatContainer.scrollHeight;
         }
-        // 创建一个段落元素来添加文本消息
-        // var p = document.createElement('p');
-        // p.classList.add('message', type);
-        // p.textContent = message;
-        // container.appendChild(p);
-
-        // // 如果提供了图片源地址，则创建一个图片元素并添加到容器中
-        // var img = document.createElement('img');
-        // img.src = 'https://oss.1381801.com/forum/202209/02/212909m8d7zr7pt3bzd9yz.jpg';
-        // img.classList.add('ImageStyle'); // 可以添加一个特定的类来控制图片的样式
-        // container.appendChild(img);
-
-        // // 将容器元素添加到聊天容器中
-        // chatContainer.appendChild(container);
-
-        // // 滚动到聊天容器的底部
-        // chatContainer.scrollTop = chatContainer.scrollHeight;
-        // var p = document.createElement('p');
-        // p.classList.add('message', type);
-        // p.textContent = message;
-        // chatContainer.appendChild(p);
-        // chatContainer.scrollTop = chatContainer.scrollHeight;
       }
       socket.on('serverData', function (data) {
         addMessage(data, 'server');
@@ -115,7 +91,6 @@
         if (event.keyCode === 13 || event.key === 'Enter') {
           // 阻止默认的回车键行为（换行）
           event.preventDefault();
-
           // 获取输入框中的文本
           var text = document.getElementById('inputText').value;
           if (text.trim() !== '') {
