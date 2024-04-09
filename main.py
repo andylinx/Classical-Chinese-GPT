@@ -87,6 +87,7 @@ def output(messa = ""):
    time.sleep(0.1)
 
 def get_keywords(sentence):
+    key_words = {}
     for i in sentence[0]:
      if i in word_dic.keys():
         res = ""
@@ -94,7 +95,9 @@ def get_keywords(sentence):
         res = res + str(i) + ":\n"
         for item in value:
            res = res + str(item) + "\n"
-        output(res)
+        key_words[i] = res
+    for _,ele in key_words.items():
+       output(ele)
 
 output("准备就绪，快来和我聊天吧\n")
 
