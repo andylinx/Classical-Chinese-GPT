@@ -11,17 +11,21 @@ Algorithm Comprehend Heritage
 
 第一代 **问·道** 能够支持无需gpu的部署，对RAM占用较小，且有着良好的对话质量。
 
+第二代 **问·道** 增加了UI界面，使用更简洁方便。且修复了文言字词会重复出现的问题，也提升了回复速度。
 
 
 ## 内容说明
 
 - ChatGLM3-int4 : 对话大模型
-- TranslateModel : 翻译大模型
+- TranslateModel : 翻译大模型  
 - crawler.py: 数据爬虫
 - vocab.txt: 文言字词数据
 - requirements.txt: 环境依赖文件
 - bigdl_llm_lowbit.py: 模型压缩 (无需重复运行)
+- web.css: 网页参数格式
+- test.html: 网页格式
 - main.py: 主体运行文件
+- socket.js: 启动浏览器的界面
 - 问·道.pdf : 项目技术报告
 
 
@@ -52,7 +56,7 @@ python3 bigdl_llm_lowbit.py
 #### 主体运行
 
 ```
-python3 main.py
+node socket.js
 ```
 
 **即可开始对话学习啦~**
@@ -63,9 +67,6 @@ python3 main.py
 
 ## Demo
 
+![image](https://github.com/andylinx/Classical-Chinese-GPT/blob/main/image/v2.0_demo1.png)
 
-![image](https://github.com/andylinx/Classical-Chinese-GPT/blob/main/image/demo1.png)
-
-**文言字词教学模式**
-
-![image](https://github.com/andylinx/Classical-Chinese-GPT/blob/main/image/demo2.png)
+![image](https://github.com/andylinx/Classical-Chinese-GPT/blob/main/image/v2.0_demo2.png)
