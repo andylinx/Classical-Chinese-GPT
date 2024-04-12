@@ -2,11 +2,10 @@ import warnings
 warnings.filterwarnings ("ignore")
 import sys
 import torch
-
 from bigdl.llm.transformers import AutoModelForCausalLM
-
-save_path = "/mnt/d/cs_courses/Classical-Chinese-GPT/ChatGLM3-int4"
-model_path = "/mnt/d/cs_courses/Classical-Chinese-GPT/ChatGLM3-int4"
+#print("成功接入程序")
+save_path = "D:\cs_courses\Classical-Chinese-GPT\ChatGLM3-int4"
+model_path = "D:\cs_courses\Classical-Chinese-GPT\ChatGLM3-int4"
 
 model = AutoModelForCausalLM.load_low_bit(save_path,
                                           trust_remote_code=True)
@@ -54,12 +53,12 @@ def get_answer(prompt):
     output = model.generate(input_ids,
                             max_new_tokens=n_predict)
     res = tokenizer.decode(output[0], skip_special_tokens=True)
-    return res[len(prompt)+12:]
+    return res[len(prompt)+11:]
 
 import re
 
 word_dic={}
-with open('vocab.txt', 'r') as file:
+with open('vocab.txt', 'r',encoding='utf-8') as file:
     for line in file:
         split_points = [match.start() for match in re.finditer(r'\d+', line)]
         split_points.append(len(line))
@@ -105,6 +104,8 @@ while 1:
   prompt = sys.stdin.buffer.readline()
   prompt = prompt.strip().decode('utf-8')
   res = get_answer(prompt)
+  res_out = ''.join(res) + "\n"
+  output(res_out)
   result = inference(res)
   result_out = ''.join(result) + "\n"
   output(result_out)
