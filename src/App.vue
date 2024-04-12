@@ -44,7 +44,7 @@
 }
 
 .left {
-  flex: 3;
+  flex: 6;
   background-color: rgb(240, 240, 240);
 }
 
