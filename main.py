@@ -3,7 +3,7 @@ warnings.filterwarnings ("ignore")
 import sys
 import torch
 from bigdl.llm.transformers import AutoModelForCausalLM
-#print("成功接入程序")
+print("成功接入程序")
 save_path = "D:\cs_courses\Classical-Chinese-GPT\ChatGLM3-int4"
 model_path = "D:\cs_courses\Classical-Chinese-GPT\ChatGLM3-int4"
 
