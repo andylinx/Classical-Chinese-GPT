@@ -3,7 +3,7 @@
         <img src="../assets/wen.jpg" alt="?" class="head-pic">
         <div class="r">
             <div class="text">
-                <el-text tag="b" size="large">问 · 道</el-text>
+                <el-text tag="b" size="large" class="wen">问 · 道</el-text>
             </div>
             <div class="user_part">
                 <div class="user_name"><el-text class="mx-1" tag="b" type="info">计算机科学家</el-text></div>
@@ -25,7 +25,9 @@
     margin-left: 100px;
     height: 100%;
 }
-
+.wen{
+    font-size: 30px;
+}
 .r {
     width: 100%;
     display: flex;
@@ -46,7 +48,7 @@
 
 .user_name {
     flex: 3;
-    margin-top: 6px;
+    margin-top: 10px;
 }
 
 .pic {

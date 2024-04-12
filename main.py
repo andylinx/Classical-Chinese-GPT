@@ -3,7 +3,7 @@ warnings.filterwarnings ("ignore")
 import sys
 import torch
 from bigdl.llm.transformers import AutoModelForCausalLM
-print("成功接入程序")
+#print("成功接入程序")
 save_path = "D:\cs_courses\Classical-Chinese-GPT\ChatGLM3-int4"
 model_path = "D:\cs_courses\Classical-Chinese-GPT\ChatGLM3-int4"
 
@@ -16,7 +16,7 @@ tokenizer = AutoTokenizer.from_pretrained(model_path,
                                           trust_remote_code=True)
 
 CHATGLM_V2_PROMPT_TEMPLATE = "问:{prompt}\n\n中文回答:"
-
+TRANSLATE_TEMPLATE = "将这段话翻译为白话文:{prompt}白话文为:"
 n_predict = 32 #max_new_tokens parameter in the generate function defines the maximum number of tokens to predict.
 
 from transformers import EncoderDecoderModel
@@ -46,15 +46,20 @@ def inference(text):
             pad_token_id=trans_tokenizer.pad_token_id,
         ), skip_special_tokens=True)
 
-def get_answer(prompt):
+def get_answer(prompt, mode = 1):
   with torch.inference_mode():
-    prompt = CHATGLM_V2_PROMPT_TEMPLATE.format(prompt=prompt)
+    if mode == 1:
+        prompt = CHATGLM_V2_PROMPT_TEMPLATE.format(prompt=prompt)
+    else:
+        prompt = TRANSLATE_TEMPLATE.format(prompt=prompt)
     input_ids = tokenizer.encode(prompt, return_tensors="pt")
     output = model.generate(input_ids,
                             max_new_tokens=n_predict)
     res = tokenizer.decode(output[0], skip_special_tokens=True)
-    return res[len(prompt)+11:]
-
+    if mode == 1:
+        return res[len(prompt)+11:]
+    else:
+       return res[len(prompt)+11:]
 import re
 
 word_dic={}
@@ -101,12 +106,23 @@ def get_keywords(sentence):
 output("准备就绪，快来和我聊天吧\n")
 
 while 1:
+  tag = False
   prompt = sys.stdin.buffer.readline()
   prompt = prompt.strip().decode('utf-8')
+  if prompt[0] == '1':
+     tag = True
+  prompt = prompt[1:]
+  origin_prompt = prompt
   res = get_answer(prompt)
-  res_out = ''.join(res) + "\n"
-  output(res_out)
-  result = inference(res)
-  result_out = ''.join(result) + "\n"
-  output(result_out)
-  get_keywords(result)
+  if tag == False:
+    res_out = ''.join(res) + "\n"
+    output(res_out)
+    res_trans = get_answer(origin_prompt, 0)
+    res_out = ''.join(res_trans) + "\n"
+    output(res_out)
+    get_keywords(origin_prompt)
+  else:
+    result = inference(res)
+    result_out = ''.join(result) + "\n"
+    output(result_out)
+    get_keywords(result)
